@@ -1,0 +1,11 @@
+# Sensitive files
+clash_config.txt
+subscription_url.txt
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
