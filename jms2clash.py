@@ -10,6 +10,7 @@ Usage:
 import argparse
 import base64
 import json
+import os
 import re
 import sys
 import urllib.parse
@@ -274,7 +275,7 @@ def main():
     parser.add_argument("--url", dest="url_flag", help="Subscription URL")
     parser.add_argument("-f", "--file", dest="url_file", default=None,
                         help="File containing subscription URL (first non-empty line)")
-    parser.add_argument("-o", "--output", default=None, help="Output file path (default: stdout)")
+    parser.add_argument("-o", "--output", default=None, help="Output file path (default: output/clash_config.txt)")
     args = parser.parse_args()
 
     url = args.url or args.url_flag
@@ -296,12 +297,14 @@ def main():
     config = build_clash_config(nodes)
     output = yaml.dump(config, default_flow_style=False, allow_unicode=True, sort_keys=False)
 
-    if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(output)
-        print(f"Clash config written to {args.output}")
-    else:
-        print(output)
+    out_path = args.output
+    if not out_path:
+        os.makedirs("output", exist_ok=True)
+        out_path = os.path.join("output", "clash_config.txt")
+
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(output)
+    print(f"Clash config written to {out_path}")
 
 
 if __name__ == "__main__":

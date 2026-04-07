@@ -1,5 +1,5 @@
 # Sensitive files
-clash_config.txt
+output/
 subscription_url.txt
 
 # Python

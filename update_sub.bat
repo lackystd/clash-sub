@@ -1,3 +1,3 @@
 @echo off
 echo Updating subscription...
-python "%~dp0jms2clash.py" --file "%~dp0subscription_url.txt" -o "%~dp0clash_config.txt"
+python "%~dp0jms2clash.py" --file "%~dp0subscription_url.txt" -o "%~dp0output\clash_config.txt"
